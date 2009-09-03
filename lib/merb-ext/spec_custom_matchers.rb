@@ -44,12 +44,36 @@ module MerbExt
       end
     
       def failure_message
-        "expected #{@target.body} to looks like:\n#{@raw} \n #{@fields.inspect}"
+        "expected #{@target.body} to look like:\n#{@raw} \n #{@fields.inspect}"
       end
     end
   
     def have_table(table)
       HaveTable.new(table)
+    end
+    
+    class HaveList
+      def initialize(list)
+        @lsit = list
+        @list_items = list.split("\n").map {|e| e.strip}
+      end
+
+      def matches?(target)
+        @target = target
+
+        @list_items.each_with_index do |item, index|
+          matcher = ::Webrat::Matchers::HaveXpath.new("//ul//li[#{index+1}][contains(. ,'#{item}')]")
+          return false unless matcher.matches?(target)
+        end
+      end
+
+      def failure_message
+        "expected #{@target.body} to look like: #{@list}"
+      end
+    end
+
+    def have_list(list)
+      HaveList.new(list)
     end
   
   end
