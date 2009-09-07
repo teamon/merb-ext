@@ -52,18 +52,18 @@ module MerbExt
     end
     
     def put_button(*args, &block)
-      button(:put, *args, &block)
+      js_button(:put, *args, &block)
     end
     
     def post_button(*agrs, &block)
-      button(:post, *args, &block)
+      js_button(:post, *args, &block)
     end
     
     def delete_button(*args, &block)
-      button(:delete, *args, &block)
+      js_button(:delete, *args, &block)
     end
     
-    def button(method, label, url, attrs = {}, &block)
+    def js_button(method, label, url, attrs = {}, &block)
       tag :form, :class => "#{method}-btn btn", :action => url, :method => :post do
         tag(:input, :type => :hidden, :name => "_method", :value => method.to_s) <<
         tag(:input, attrs.merge(:value => label, :type => :submit))
