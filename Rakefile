@@ -1,12 +1,12 @@
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gemspec|
-    gemspec.name = "merb-flash"
+    gemspec.name = "merb-ext"
     gemspec.summary = gemspec.description = "Merb extensions"
     gemspec.email = "i@teamon.eu"
     gemspec.homepage = "http://github.com/teamon/merb-ext"
     gemspec.authors = ["Tymon Tobolski"]
-    gemspec.add_dependency('merb-core', '>= 1.1')
+    gemspec.add_dependency('merb-core', '>= 1.1.0.pre')
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
